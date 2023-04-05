@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>promise hands on</title>
+  </head>
+  <body>
+    <h1>Promise Hands on</h1>
+    <hr />
+    <h1>
+      Q1.Write one example explaining how you can write a callback function.
+    </h1>
+    <pre>function abc(){
+        var a=10;
+        function pqr(){
+            console.log(a);
+        }
+        pqr();
+    }abc();
+    <b>Output: 10:-- As closure function is an example for the callback function.</b>
+    </pre>
+    <h1>
+      Q2.Write a callback function to print numbers from 1 to 7, in which 1
+      should be printed after 1 sec, 2 should be printed after 2 sec, 3 should
+      be printed after 3 sec, and so on.<br />
+      Explain callback hell.<br />
+      Numbers<br />
+      1 2 3 4 5 6 7
+    </h1>
+    <pre>
+setTimeout(() =>{
+        console.log('1')
+        setTimeout(() => {
+            console.log('2')
+            setTimeout(() =>{
+                console.log('3')
+                setTimeout(() =>{
+                     console.log('4')
+                     setTimeout(() => {
+                       console.log('5')
+                       setTimeout(() =>{
+                          console.log('6')
+                            setTimeout(() =>{
+                              console.log('7')
+                            },7000)
+                        },6000)
+                    },5000);
+                },4000);
+            },3000)
+        },2000);
+    },1000);
+    </pre>
+    <b
+      >Output: 1 2 3 4 5 6 7 :-- The callback hell is the way of a coding
+      callback funtions with in the funtions goes on calling one over the other
+      in a way of pyramid way of structure of coding <br />
+      all the callback funtions. such structure way of pyramid is known as
+      Callback Hell.
+    </b>
+    <h1>
+      Q3.Write the promise function to print numbers from 1 to 7, in which 1
+      should be printed after 1 sec, 2 should be printed after 2 sec, 3 should
+      be printed after 3 sec, and so on. <br />
+      Numbers<br />
+      1 2 3 4 5 6 7
+    </h1>
+    <pre>
+        const printnumber =(time,func) => {
+            return new Promise((resolve,reject) =>{
+                if(func){
+                    setTimeout(() => {
+                        resolve (func());
+                    },time)
+                }else{
+                    reject('give valid number');
+                }
+            })
+        }
+        
+        printnumber(0, () => console.log("Numbers"))
+        .then(() => {
+            return printnumber(1000, () => console.log('1'))
+        })
+        .then(() => {
+            return printnumber(2000, () => console.log('2'))
+        })
+        .then(() => {
+            return printnumber(3000, () => console.log('3'))
+        })
+        .then(() => {
+            return printnumber(4000, () => console.log('4'))
+        })
+        .then(() => {
+            return printnumber(5000, () => console.log('5'))
+        })
+        .then(() => {
+            return printnumber(6000, () => console.log('6'))
+        })
+        .then(() => {
+            return printnumber(7000, () => console.log('7'))
+        })
+        
+    </pre>
+    <h1>
+      Q4.Create a promise function accepting an argument, if yes is passed to
+      the function then it should go to resolved state and print Promise
+      Resolved, and if nothing is passed <br />
+      then it should go to reject the state and catch the error and print
+      Promise Rejected
+    </h1>
+    <pre>
+        function prom(x){
+            return new Promise((resolve,reject) => {
+                if(x === "yes"){
+                    resolve("promise resolved");
+                }else{
+                    reject("promise rejected");
+                }
+            });
+        }
+        prom("")
+        .then((x) => console.log(x))
+        .catch((y) => console.log(y))
+    </pre>
+    <h1>Q5.Create example to explain callback function</h1>
+    <pre>
+        function age(a,b){
+            return a+b;
+        }
+        function ABc(name, age){
+            console.log(name,age);
+        }
+        ABc('EA',age(10,11))
+    </pre>
+    <h1>Q6.Create example to explain callback hell function</h1>
+    <pre>
+        setTimeout(() => {
+            console.log('a');
+            setTimeout(() => {
+                console.log('b');
+                setTimeout(() => {
+                    console.log('c');
+                },3000)
+            },2000)
+        },1000)
+    </pre>
+    <h1>Q7.Create example to explain promises function</h1>
+    <pre>
+        function mypromise(){
+            return new Promise((resolve, reject) => {
+                let count=3;
+                if(count > 2){
+                    resolve("great");
+                }else {
+                    reject("low");
+                }
+            })
+        }
+        mypromise.then((x) => console.log(x))
+        .catch((y) => console.log(y))
+    </pre>
+    <h1>Q8.Create example to explain async await function</h1>
+    <pre>
+        function createorder(){
+            return new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    console.log("order created");
+                    resolve();
+                },1000);
+            });
+        }
+        async function orderplaced(){
+            try{
+                await createorder();
+                console.log("order placed");
+            }
+            catch{
+                console.log("error");
+            }
+        }
+        orderplaced();
+    </pre>
+    <h1>Q9.Create example to explain promise.all function</h1>
+    <pre>
+        const Abc(){
+            new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    resolve()
+                },1000);
+            });
+        }
+        const xyz(){
+            new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    resolve()
+                },2000);
+            });
+        }
+        const step2(){
+            console.log("abc,xyz");
+        }
+        Promise.all([Abc(),xyz()]).then(() => {
+            step2();
+        });
+        .catch(() => {
+            console.log("error");
+        });
+    </pre>
+  </body>
+</html>
